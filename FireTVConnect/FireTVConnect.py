@@ -79,8 +79,8 @@ class adb:
         Resets the ADB server by disconnecting any connections to ADB and killing the old server.
 """
 class Connector:
-    debug=True
-    silent=False
+    debug=False # Change this to True to enable debugging
+    silent=False \
     KeyLibrary={"Up" : "19","Down" : "20","Left":"21","Right":"22","Enter":"66","Back":"4","Home":"3","Menu":"1","Play/Pause":"85","Previous":"88","Next":"87"}
     if debug==True: # If enabled by default, create a debug object
         db=debugger()
@@ -91,7 +91,7 @@ class Connector:
         db.alert("Created ADB object:","Alert")
         db.alert("Object info: "+str(adb),"Sub_alert")
     def __init__(self,ip_address,port=5555):
-        self.ip_address=ip_address
+        self.ip_address=ip_address # Set the ip_address and port to the input values
         self.port=port
         if Connector.debug==True:
             self.db.alert("Created Connector Object:","Alert")
@@ -105,22 +105,22 @@ class Connector:
             self.db.alert("Connecting to: "+str(self.ip_address)+":"+str(self.port),"Sub_alert")
         elif Connector.silent==False:
             print("Connecting to FireTv")
-        cmd_res=self.adbclient.SendCMD("connect "+str(self.ip_address)+":"+str(self.port))
-        if not cmd_res==0:
+        cmd_res=self.adbclient.SendCMD("connect "+str(self.ip_address)+":"+str(self.port)) # Send a connect command using the adb client
+        if not cmd_res==0: # If it returns anything but 0, give a warning about being unable to connect
             print("Unable to Connect to FireTV, am I on?")
 
-        elif Connector.debug==True:
+        elif Connector.debug==True: # If the debugging is true, show debugging info
             self.db.alert("Connected FireTv from object with following information: ","Alert")
             self.db.alert("Address: "+str(self.ip_address),"Sub_alert")
             self.db.alert("Port: "+str(self.port),"Sub_alert")
-        elif Connector.silent==False:
+        elif Connector.silent==False: # If not in silent mode, print connected
             print("Connected To FireTV!")
     def KeyEvent(self,event):
-        if Connector.debug==True:
+        if Connector.debug==True: # Give debugging information
             self.db.alert("Creating Key Event: ","Alert")
             self.db.alert("KeyEvent: "+str(event),"Sub_alert")
             self.db.alert("KeyCode: "+str(self.KeyLibrary[str(event)]),"Sub_alert")
-        cmd_res=self.adbclient.SendCMD("shell input keyevent "+str(self.KeyLibrary[str(event)]))
+        cmd_res=self.adbclient.SendCMD("shell input keyevent "+str(self.KeyLibrary[str(event)])) # Send a keyboard input event using the adb 
         if cmd_res==0:
             if Connector.debug==True:
                 self.db.alert("Key Event Send Status: Sent (Success!)","Sub_alert")
@@ -133,16 +133,16 @@ class Connector:
                 sys.exit(1)
             else:
                 self.db.alert("Key Event Send Status: Unable to Send(FAIL)","Sub_alert")
-    def Reset(self):
+    def Reset(self): 
         if Connector.debug==True:
             self.db.alert("Resetting adb server...","Alert")
-        cmd_res=self.adbclient.SendCMD("disconnect")
+        cmd_res=self.adbclient.SendCMD("disconnect") # Disconnect the current connection
         if not cmd_res==0:
             print("Unable to Reset Server: Disconnect Failed!")
             if Connector.debug==False:
                 input("Press Enter to Exit")
                 sys.exit(1)
-        cmd_res=self.adbclient.SendCMD("kill-server")
+        cmd_res=self.adbclient.SendCMD("kill-server") # Killoff the server
         if not cmd_res==0:
             print("Unable to Reset Server: Unable to Kill Server!")
             if Connector.debug==False:
@@ -159,7 +159,7 @@ class Connector:
             self.db.alert("App Launch Point: "+str(cmd),"Sub_alert")
         elif Connector.silent==False:
             print("Launching app: "+str(name))
-        cmd_res=self.adbclient.SendCMD("shell monkey -p "+str(cmd)+" -c android.intent.category.LAUNCHER 1")
+        cmd_res=self.adbclient.SendCMD("shell monkey -p "+str(cmd)+" -c android.intent.category.LAUNCHER 1") #Launch the given app
         if cmd_res==0:
             if Connector.debug==True:
                 self.db.alert("Launch App Send Status: Sent (Success!)","Sub_alert")
