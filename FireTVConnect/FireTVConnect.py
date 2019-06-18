@@ -1,7 +1,7 @@
 """ Title: FireTV Connect
     Author: Zackery Painter
     Date Created: 6/16/2019
-    Date Modified: 6/16/2019
+    Date Modified: 6/17/2019
 
     Description: This module gives the ability to connect to and control a FireTV or FireTV Stick using an ADB Connection
 
