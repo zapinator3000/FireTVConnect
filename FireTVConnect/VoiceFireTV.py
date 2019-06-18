@@ -2,7 +2,7 @@ import os
 import time, sys
 import speech_recognition as sr
 import FireTVConnect as firetv
-tv=firetv.Connector("192.168.1.73")
+tv=firetv.Connector("IP ADDRESS HERE")
 tv.Reset()
 tv.Connect()
 #This is the example code from the Speech Recognition module
