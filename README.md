@@ -23,3 +23,16 @@ Note:
 Additional Notes:
 
   You will need to know the IP address of your Fire-TV/Fire-TV Stick. See Amazon's support page for information on how to find this. You will also need to have USB Debugging enabled on your FireTV, see Amazon's support page on how to do this.
+
+Requirements:
+
+Windows 7/8/8.1/10, Maybe Linux (Untested), Maybe Unix (Untested).
+
+Python 3.6 (Not compatible with 2.7 or 3.7 because of Pyaudio, but only for voice test program)
+
+Pyaudio (For Voice control test program only):
+ Install with:
+       pip install Pyaudio
+Speech_Recognition (For Voice control test program only):
+ Install with:
+       pip install Speech_Recognition
