@@ -80,7 +80,7 @@ class adb:
 """
 class Connector:
     debug=False # Change this to True to enable debugging
-    silent=False \
+    silent=False 
     KeyLibrary={"Up" : "19","Down" : "20","Left":"21","Right":"22","Enter":"66","Back":"4","Home":"3","Menu":"1","Play/Pause":"85","Previous":"88","Next":"87"}
     if debug==True: # If enabled by default, create a debug object
         db=debugger()
