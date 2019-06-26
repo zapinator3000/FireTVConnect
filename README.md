@@ -14,7 +14,13 @@ Usage:
     
  For more Usage information, see the test.py script.
  
- 
+Configuration:
+  The main configuration file is in:
+       [FireTVConnectDirectory]/Config/FireTV.config
+  There are a few options that can be configured.
+     
+     DEBUG - Setting this True Enables the DEBUG mode
+     SILENT - Setting this to True prevents normal alerts 
  
 Note:
 
@@ -30,14 +36,3 @@ Windows 7/8/8.1/10, Maybe Linux (Untested), Maybe Unix (Untested).
 
 Python 3.6 (Not compatible with 2.7 or 3.7 because of Pyaudio, but only for voice test program)
 
-Pyaudio (For Voice control test program only):
-
- Install with:
- 
-       pip install Pyaudio
-       
-Speech_Recognition (For Voice control test program only):
-
- Install with:
- 
-       pip install Speech_Recognition
