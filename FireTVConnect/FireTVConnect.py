@@ -19,7 +19,15 @@
 """
 import os, time, sys, subprocess
 from datetime import datetime
-
+if os.path.exists("Backend")==True and os.path.exists("Config/FireTV.config")==False:
+    os.chdir("Backend")# Fix Issue with importing from external directory
+    if os.path.exists("Config/FireTV.config")==False:
+        print("Unable to find the location of the configuration file: FireTV.conf.")
+        input("Create this file under the Config directory [Press Enter]")
+        print("The program will now quit")
+        sys.exit(1)
+sys.path.append('Config') # Append the config file path to the python path
+import config
 
 """Debugger Class: Creates a DEBUGGING object for logging and standard alerts
 
@@ -78,13 +86,33 @@ class adb:
     Reset:
         Resets the ADB server by disconnecting any connections to ADB and killing the old server.
 """
-class Connector:
-    debug=False # Change this to True to enable debugging
-    silent=False 
+class Connector:     
+    # Load Configuration data from file
+    cnfg=config.configurator("Config/FireTV.config")
+    returned=cnfg.process()
+    keys=returned[0]
+    values=returned[1]
+    configuration={}
+    cnt=0
+    """ Copy configuration into dictionary"""
+    for item in keys:
+        configuration[str(item)]=str(values[int(cnt)])
+        cnt=cnt+1
+
+    if configuration["DEBUG"]=="True":
+        print("FireTVConnect: NOTE: DEBUG Mode enabled!")
+        debug=True
+    else:
+        debug=False
+    if configuration["SILENT"]=="True":
+        silent=True
+    else:
+        silent=False
+
+
     KeyLibrary={"Up" : "19","Down" : "20","Left":"21","Right":"22","Enter":"66","Back":"4","Home":"3","Menu":"1","Play/Pause":"85","Previous":"88","Next":"87"}
     if debug==True: # If enabled by default, create a debug object
         db=debugger()
-    if debug==True:
         db.alert("Creating adb object","Alert")
     adbclient=adb()
     if debug==True:
