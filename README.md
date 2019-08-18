@@ -2,10 +2,15 @@
 This is a python library for connecting to and controlling a fire TV 
 
 Installation:
+Windows:
 
 1. Place the contents of the entire directory into the same folder that your script is in.
  (I don't know how to do the easy install stuff yet, or setup.py... If anyone wants to do that for me, go ahead)
 
+Linux:
+1. Install adb according to your distribution. It may be packaged under another name. There is a lot of documentation for this online already.
+2. Download this using wget or git. 
+3. Copy the entire contents to your program's root directory. (Again, I don't know how to set up an easy installer yet and I don't have to do so right now. Feel free to re-package as one.)
 
 Usage:
   import the software as follows:
