@@ -2,6 +2,8 @@ This document contains detailed usage instructions for the FireTVConnect Python 
 This document is broken up into sections defined by brackets for example [Example].
 Sub-sections are defined by arrows, for example: --> Example <--
 
+For Additional usage information and more in-depth usage, the source code is highly commented.
+
                   [General]
 
 	--> Creating a Connector Instance <--
