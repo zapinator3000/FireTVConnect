@@ -1,0 +1,81 @@
+This document contains detailed usage instructions for the FireTVConnect Python Module.
+This document is broken up into sections defined by brackets for example [Example].
+Sub-sections are defined by arrows, for example: --> Example <--
+
+                  [General]
+
+	--> Creating a Connector Instance <--
+
+   In order to use the FireTVConnect library, you must first create an connection instance. Here is an example of creating a generic instance.
+ 
+
+ 		import FireTVConnector as firetv # Import the base library  
+		tv=firetv.Connector(<IP-ADDRESS>) # Create a generic instance with the IP address provided.
+
+
+   Optionally, you can specify a port. If a port is not specified, the default ADB port is used. Here is an example.
+
+
+		import FireTVConnector as firetv # Import the base library
+		tv=firetv.Connector(<IP-ADDRESS>,<PORT>) # Create an instance with a port specified
+
+
+	--> Using the Connector Instance <--
+   
+   There are 3 main things that can be done with a basic connection instance.
+	1. Connect to the FireTV
+	2. Reset the Connection to the FireTV
+	3. Send a basic Key Event
+	4. Launch an application (Experimental)
+   
+   Connecting to the FireTV with 'tv' as the connector instance:
+		tv.Connect() # Connect to the FireTV
+
+   Resetting the connection to the FireTV:
+		tv.Reset() # Reset the connection
+
+   Sending a Key Event:
+	
+	Sending basic key events is simple. At the time of writing, here are the possible keys:
+        
+	"Up", "Down", "Left", "Right", "Enter", "Back", "Home", "Menu", "Play/Pause", "Previous", "Next"
+        
+	Here is a basic example of sending a Play or Pause to the device:
+
+		tv.KeyEvent("Play/Pause")
+   Launching an App:
+	An app can be launched if the executable path is known. There are various tutorials and the Voice Example includes
+      common apps.
+	Here is an example of launching Netflix.
+		#tv.LaunchApp(<Name>,<.com Location>) The name is arbitrary
+		tv.LaunchApp("Netflix","com.netflix.ninja") # Launch Netflix. Note that name is arbitrary for human readability in debug mode
+
+
+
+
+                  [Interfacing with ADB directly]
+
+	--> Basics <--
+     The adb class allows for direct manipulation of the FireTV using adb. An instance is genreated automatically when a Connector instance 
+    is created. However, other instances can be created to directly manipulate the FireTV within your project. This also requires a connection
+    to already be established to the device.
+
+	--> Sending a Command <--
+     
+     Below is an example.
+
+		import FireTVConnect as firetv
+		adb_client=adb() # Generate a new adb instance
+		adb.SendCMD(<Command>) # Send a command to the device
+
+
+
+                  [Configuration]
+
+	--> Basic Configuration <--
+
+		The default configuration file is FireTV.config and is stored in the Config directory.
+	      Each variable is separated by line. The key and value is separated by an equal sign (=)
+	--> Example Arguments <--
+		silent=False       <- If set to true, hides most of the output of the module
+		debug=False	   <- If set to true, gives detailed output information including errors and instance info.
